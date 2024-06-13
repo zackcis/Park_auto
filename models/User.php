@@ -63,14 +63,14 @@ class User
         return false;
     }
 
-    public static function findByEmail()
+    public static function findByUsername($username)
     {
-
+        
         $database = new Database();
         $conn = $database->connect();
-        $query = 'SELECT * FROM users WHERE email = :email';
+        $query = 'SELECT * FROM users WHERE username = :username';
         $stmt = $conn->prepare($query);
-        $stmt->bindParam('email', $email);
+        $stmt->bindParam(':username', $username);
         $stmt->execute();
 
 

@@ -16,6 +16,8 @@ require_once '../includes/header.php';
         <input type="password" placeholder="Your password" name="password" require class="w-[50%] border border-black rounded-lg p-1">
         
         <button type="submit" class="bg-white rounded-full p-3">Login</button>
+
+        <a href="./register.php">Create account</a>
     </form>
 </div>
 

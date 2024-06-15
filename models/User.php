@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/database.php';
+require_once dirname(__DIR__) . '../config/database.php';
 
 class User
 {
@@ -63,6 +63,17 @@ class User
         return false;
     }
 
+    public static function findByEmail($email)
+    {
+        $database = new Database();
+        $conn = $database->connect();
+        $query = 'SELECT * FROM users WHERE email = :email';
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+    }
+
     public static function findByUsername($username)
     {
         
@@ -72,8 +83,15 @@ class User
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->execute();
-
-
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public static function findAllUser(){
+        $database = new Database();
+        $conn = $database->connect();
+        $query = 'SELECT * FROM users';
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../public/css/app.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <title>Park auto</title>
 </head>
 
@@ -19,12 +20,8 @@
                     <li class="cursor-pointer mx-4 ">Our Services</li>
                     <li class="cursor-pointer mx-4 ">About Us</li>
                     <li class="cursor-pointer mx-4 ">Contact Us</li>
-                    <li class="cursor-pointer mx-4 ">
-                        <form action="../../routes/logout.php" method="post">
-                            <button type="submit">Logout</button>
-                        </form>
-                    </li>
-                    <?php if($_SESSION['role'] === 'admin') : ?>
+
+                    <?php if ($_SESSION['role'] === 'admin') : ?>
                         <li class="cursor-pointer mx-4 ">
                             Cars management
                         </li>
@@ -34,14 +31,17 @@
                         <li class="cursor-pointer mx-4 ">
                             Rents management
                         </li>
-                        <?php endif ?>
+                    <?php endif ?>
+                    <li class="cursor-pointer mx-4 ">
+                        <form action="../../routes/logout.php" method="post">
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         <?php else : ?>
             <h1 class="text-4xl w-full  text-center mt-7">WELCOME TO PARK AUTO</h1>
-            <?php
-            include_once '../auth/login.php'
-            ?>
-            
+
+
         <?php endif ?>
     </header>

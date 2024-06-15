@@ -35,15 +35,6 @@ class Rental
         return false;
     }
 
-    public static function findAll()
-    {
-        $database = new Database();
-        $conn = $database->connect();
-        $query = 'SELECT * FROM rentals WHERE :user_id = user_id ';
-        $stmt = $conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public static function findByUserId(){
 
@@ -58,4 +49,13 @@ class Rental
 
 
     }
+
+    public static function findAll(){
+        $database = new Database() ;
+        $conn =$database->connect();
+        $query = 'SELECT * FROM rentals';
+        $stmt = $conn->prepare($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }

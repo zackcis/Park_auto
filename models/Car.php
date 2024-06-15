@@ -1,6 +1,6 @@
 <?php 
 
-require_once '../config/database.php';
+require_once dirname(__DIR__) . '/config/database.php';
 class Car {
 
     private $conn;
@@ -10,6 +10,7 @@ class Car {
     public $model;
     public $mark;
     public $registration_number;
+    public $status;
 
 
     public function __construct()
@@ -19,24 +20,26 @@ class Car {
     }
 
     public function create(){
-        $query = 'INSERT INTO ' . $this->table . '(model, mark, registration_number) VALUES (:model, :mark, :registration_number)';
+        $query = 'INSERT INTO ' . $this->table . '(model, mark, registration_number, status) VALUES (:model, :mark, :registration_number, :status)';
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':model', $this->model);
         $stmt->bindParam(':mark', $this->mark);
         $stmt->bindParam(':registration_number', $this->registration_number);
+        $stmt->bindParam(':status', $this->status);
         if ($stmt->execute()) {
             return true;
         }
         return false;
     }
     public function update(){
-        $query = 'UPDATE ' . $this->table . 'SET model = :model, mark = :mark, registration_number = :registration_number';
+        $query = 'UPDATE ' . $this->table . 'SET model = :model, mark = :mark, registration_number = :registration_number, status = :status';
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':model', $this->model);
         $stmt->bindParam(':mark', $this->mark);
-        $stmt->bindParam(':registration', $this->registration_number);
+        $stmt->bindParam(':registration_number', $this->registration_number);
+        $stmt->bindParam(':status', $this->status);
         $stmt->bindParam(':id', $this->id);
         if ($stmt->execute()) {
             return true;
@@ -53,6 +56,14 @@ class Car {
         }
         return false;
 
+    }
+    public static function findAll(){
+        $database = new Database();
+        $conn = $database->connect();
+        $query = 'SELECT * FROM cars';
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 

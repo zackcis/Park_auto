@@ -8,12 +8,18 @@ class UserController
     {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            session_start();
 
+
+            $role = isset($_SESSION['role']) ? $_SESSION['role'] : 'user';
+            // var_dump($role);
+            // die();
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
             $password = trim($_POST['password']);
             $confirmPassword = trim($_POST['confirmPassword']);
-            $role = 'user';
+            $userRole = empty($_POST['role']) ? 'user' : trim($_POST['role']);
+
 
             $error = [];
 
@@ -49,14 +55,15 @@ class UserController
                 $user->username = $username;
                 $user->email = $email;
                 $user->password = $password;
-                $user->role = $role;
+                $user->role = $userRole;
 
                 if ($user->create()) {
                     // $_SESSION['user_id'] = $user->id;
                     // $_SESSION['username'] = $username;
                     // $_SESSION['role'] = $role;
-                    if ($_SESSION['role'] == 'admin') {
-                        header('Location: ../views/admin/user_management.php');
+                    if ($role == 'admin') {
+                        header('Location:  ../views/admin/user_management.php');
+                        exit();
                     }
                     header('Location: ../views/auth/login.php');
                     exit();
@@ -121,5 +128,48 @@ class UserController
         session_destroy();
         header('Location: ../views/auth/login.php');
         exit();
+    }
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $username = trim($_POST['username']);
+            $email = trim($_POST['email']);
+            $id = $_POST['id'];
+            $role = $_POST['role'];
+            $user = new User();
+
+
+
+            $user->username = $username;
+
+
+
+
+            $user->email = $email;
+
+
+
+
+            $user->role = $role;
+            $user->id = $id;
+
+            if ($user->update()) {
+                echo 'user updated';
+            } else {
+                echo 'something went wrong azin dyali';
+            }
+        }
+    }
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $id = $_POST['id'];
+            $user = new User();
+            $user->id = $id;
+            if ($user->delete()) {
+                echo 'user Deleted';
+            }
+        }
     }
 }

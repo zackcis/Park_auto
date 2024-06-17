@@ -38,11 +38,11 @@ include_once '../includes/header.php';
           <td><?php echo $car['model'] ?></td>
           <td><?php echo $car['registration_number'] ?></td>
           <td><?php echo $car['status'] ?></td>
-          <td class="">
-            
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal">Update</button>
+          <td class="flex gap-1">
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal<?php echo $car['id'] ?>">Update</button>
             <!-- update modal -->
-            <div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="UpdateModalLabel" aria-hidden="true">
+            <div class="modal fade" id="UpdateModal<?php echo $car['id'] ?>" tabindex="-1" aria-labelledby="UpdateModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -50,33 +50,40 @@ include_once '../includes/header.php';
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                  <form action="../../routes/updateCar.php" class="d-flex flex-column gap-4" method="post">
-                    <input type="hidden" name="id" value="<?php echo $car['id']; ?>">
-                    <label for="model-<?php echo $car['id']; ?>">Model</label>
-                    <input id="model-<?php echo $car['id']; ?>" class="border border-primary rounded" type="text" name="model" value="<?php echo $car['model']; ?>" required>
-                    <label for="mark-<?php echo $car['id']; ?>">Mark</label>
-                    <input id="mark-<?php echo $car['id']; ?>" class="border border-primary rounded" type="text" name="mark" value="<?php echo $car['mark']; ?>" required>
-                    <label for="registration_number-<?php echo $car['id']; ?>">Registration Number</label>
-                    <input id="registration_number-<?php echo $car['id']; ?>" class="border border-primary rounded" type="text" name="registration_number" value="<?php echo $car['registration_number']; ?>" required>
-                    <label for="status-<?php echo $car['id']; ?>">status</label>
-                    <select name="status" id="">
-                      <option value="">available</option>
-                      <option value="">rented</option>
-                    </select>
-                    <input id="status-<?php echo $car['id']; ?>" class="border border-primary rounded" type="text" name="status" value="<?php echo $car['status']; ?>" required>
-                    <div class="modal-footer">
+                    <form action="../../routes/updateCar.php" class="d-flex flex-column gap-4" method="POST">
+                      <input type="number" name="id" value="<?php echo $car['id']; ?>">
+
+                      <label for="model-">Model</label>
+                      <input id="model-" class="border border-primary rounded" type="text" name="model" value="<?php echo $car['model']; ?>" required>
+
+                      <label for="mark-">Mark</label>
+                      <input id="mark-" class="border border-primary rounded" type="text" name="mark" value="<?php echo $car['mark']; ?>" required>
+
+                      <label for="registration_number-">Registration Number</label>
+                      <input id="registration_number-" class="border border-primary rounded" type="text" name="registration_number" value="<?php echo $car['registration_number']; ?>" required>
+
+                      <label for="status-">Status</label>
+                      <select name="status" id="status-" class="border border-primary rounded" required>
+                        <option value="available" <?php if ($car['status'] == 'available') echo 'selected'; ?>>available</option>
+                        <option value="rented" <?php if ($car['status'] == 'rented') echo 'selected'; ?>>rented</option>
+                      </select>
+
+                      <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
+                      </div>
+                    </form>
+
                   </div>
                 </div>
               </div>
             </div>
-            
-            
-              <button type="button " class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal">Delete</button>
-            
+
+            <form action="../../routes/deleteCar.php" method="post">
+              <input type="number" class="d-none" value="<?php echo $car['id'] ?>" name="id">
+              <button type="submit " class="btn btn-danger">Delete</button>
+            </form>
+
           </td>
         </tr>
       <?php endforeach; ?>
@@ -129,7 +136,11 @@ include_once '../includes/header.php';
             <label for="registration_number">registration_number</label>
             <input class="border border-primary rounded" type="text" name="registration_number" require>
             <label for="status">status</label>
-            <input class="border border-primary rounded" type="text" name="status" require>
+            <select name="status" id="">
+              <option value="available">available</option>
+              <option value="rented">rented</option>
+            </select>
+            <!-- <input class="border border-primary rounded" type="text" name="status" require> -->
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>

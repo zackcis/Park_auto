@@ -13,7 +13,7 @@
 <body>
     <header class="w-full justify-center items-center ">
         <?php if (isset($_SESSION['user_id'])) : ?>
-            <nav class="flex w-full justify-center items-center py-4 mt-3">
+            <nav class="flex  justify-center items-center py-4 mt-3 ">
                 <ul class="flex gap-5 font-bold">
                     <li class="cursor-pointer mx-4 ">Home</li>
                     <li class="cursor-pointer mx-4 ">Cars</li>

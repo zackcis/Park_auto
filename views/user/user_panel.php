@@ -1,46 +1,77 @@
 <?php
 include_once '../../routes/authCheck.php';
 authCheck();
+include_once '../../routes/readCars.php';
 include_once '../includes/header.php';
+$cars = getAllCars();
 ?>
+
 
 
 <div class="w-full flex flex-col justify-center items-center">
     <h1 class="text-center my-5 text-4xl font-bold">User Panel</h1>
 
-    <table class="border-collapse w-[80%]">
+    <table class="table w-[80%]">
         <thead>
             <tr>
-                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Model</th>
-                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Mark</th>
-                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Status</th>
-                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Actions</th>
+                <th scope="col">#</th>
+                <th scope="col">model</th>
+                <th scope="col">mark</th>
+                <th scope="col">registration_number</th>
+                <th scope="col">status</th>
+                <th scope="col">actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-                <? foreach ($cars as $car) : ?>
-                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Company name</span>
-                        KnobHome
+            <?php foreach ($cars as $car) : ?>
+                <tr>
+                    <th scope="row"><?php echo $car['id'] ?></th>
+                    <td><?php echo $car['mark'] ?></td>
+                    <td><?php echo $car['model'] ?></td>
+                    <td><?php echo $car['registration_number'] ?></td>
+                    <td><?php echo $car['status'] ?></td>
+                    <td class="flex gap-1">
+                        <?php if ($car['status'] == 'available') : ?>
+                            <button type="button" class="btn btn-primary" id="<?php echo $car['id'] ?>" data-bs-toggle="modal" data-bs-target="#RentModal<?php echo $car['id'] ?>">Rent</button>
+                            <div class="modal fade" id="RentModal<?php echo $car['id'] ?>" tabindex="-1" aria-labelledby="RentModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Create new User</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="../../routes/renting.php" class="d-flex flex-column gap-4" method="post" id="<?php echo $car['id'] ?>">
+                                                <input id="model-" class="d-none" type="text" name="model" value="<?php echo $car['model']; ?>">
+                                                <input id="mark-" class="d-none" type="text" name="mark" value="<?php echo $car['mark']; ?>">
+                                                <input id="registration_number-" type="hidden" name="registration_number" value="<?php echo $car['registration_number']; ?>">
+                                                <input type="number" class="d-none" value="<?php echo $car['id'] ?>" name="car_id">
+                                                <input type="text" class="d-none" value="<?php echo $car['status'] ?>" name="status">
+                                                <label for="retur_date">Return date</label>
+                                                <input type="date" name="return_date" class="p-2 border-2">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <button class="btn btn-danger" type="button">Rented</button>
+                        <?php endif; ?>
+
+
+
                     </td>
-                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b  block lg:table-cell relative lg:static">
-                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
-                        German
-                    </td>
-                    <td class="w-full lg:w-auto p-3 text-gray-800  border border-b text-center block lg:table-cell relative lg:static">
-                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Status</span>
-                        <span class="rounded bg-red-400 py-1 px-3 text-xs font-bold">deleted</span>
-                    </td>
-                    <td class="w-full lg:w-auto p-3 text-gray-800  border border-b text-center block lg:table-cell relative lg:static">
-                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
-                        <a href="#" class="text-blue-400 hover:text-blue-600 underline">Edit</a>
-                        <a href="#" class="text-blue-400 hover:text-blue-600 underline pl-6">Remove</a>
-                    </td>
-                <?php endforeach ?>
-            </tr>
+                </tr>
+            <?php endforeach; ?>
+
         </tbody>
     </table>
 </div>
 
-<!-- component -->
+<?php
+include_once '../includes/footer.php';
+?>

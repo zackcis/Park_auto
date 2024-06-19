@@ -113,7 +113,13 @@ class UserController
                 $_SESSION['user_id'] = $confirm_data['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $confirm_data['role'];
-                header('Location: ../views/user/index.php');
+                if ($_SESSION['role'] == 'admin') {
+                    header('Location: ../views/admin/rents_management.php');
+                    exit();
+                }else {
+                    header('Location: ../views/user/user_panel.php');
+                    exit();
+                }
             } else {
                 echo 'Login failed something went wrong ahbibi';
                 require '../views/auth/login.php';
@@ -137,24 +143,14 @@ class UserController
             $id = $_POST['id'];
             $role = $_POST['role'];
             $user = new User();
-
-
-
             $user->username = $username;
-
-
-
-
             $user->email = $email;
-
-
-
-
             $user->role = $role;
             $user->id = $id;
 
             if ($user->update()) {
-                echo 'user updated';
+                header('Location:  ../views/admin/user_management.php');
+                exit();
             } else {
                 echo 'something went wrong azin dyali';
             }
@@ -168,7 +164,9 @@ class UserController
             $user = new User();
             $user->id = $id;
             if ($user->delete()) {
-                echo 'user Deleted';
+                // echo 'user Deleted';
+                header('Location:  ../views/admin/user_management.php');
+                exit();
             }
         }
     }

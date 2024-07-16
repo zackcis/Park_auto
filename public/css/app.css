@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+font-face{
+    font-family: robot;
+    src: url(../assets/fonts/atwriter.ttf);
+
+}
+.first-font{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

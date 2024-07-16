@@ -47,8 +47,14 @@ $cars = getAllCars();
                                                 <input id="registration_number-" type="hidden" name="registration_number" value="<?php echo $car['registration_number']; ?>">
                                                 <input type="number" class="d-none" value="<?php echo $car['id'] ?>" name="car_id">
                                                 <input type="text" class="d-none" value="<?php echo $car['status'] ?>" name="status">
-                                                <label for="retur_date">Return date</label>
-                                                <input type="date" name="return_date" class="p-2 border-2">
+                                                <label for="Pickup date">Pickup date</label>
+                                                <input type="date" name="pickup_date" class="p-2 border-2">
+                                                <label for="dropoff date">dropoff date</label>
+                                                <input type="date" name="dropoff_date" class="p-2 border-2">
+                                                <label for="Pickup location">Pickup location</label>
+                                                <input type="text" name="pickup_location" class="p-2 border-2">
+                                                <label for="dropoff date">dropoff date</label>
+                                                <input type="text" name="dropoff_location" class="p-2 border-2">
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Save changes</button>

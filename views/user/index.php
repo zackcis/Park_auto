@@ -462,7 +462,7 @@ $cars = getAllCars();
                 option.addEventListener('click', () => {
                     selected.innerHTML = option.innerHTML;
                     input.value = selected.innerHTML;
-                    
+
                     menu.classList.remove('menu-open');
                     select.classList.remove('select-clicked');
                     caret.classList.remove('caret-rotate');
@@ -482,8 +482,13 @@ $cars = getAllCars();
     <div class="hero-desc-container">
         <div class="hero-desc">
             <h3 class="fs-2 text-white mb-3 first-font"><b>Welcome</b></h3>
-            <h1 class="desc mb-3 text-white"> This is my project bitch show some <span class="text-danger">respect</span></h1>
-            <p class="desc-para text-white">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem dolor culpa laudantium nulla, in eos consequuntur at sint accusantium ea ut inventore deleniti velit amet ratione ab incidunt atque recusandae praesentium quaerat architecto soluta doloremque! Molestiae, laudantium rerum. Veritatis, itaque hic. Culpa officiis aliquam, placeat corrupti recusandae et delectus nulla.</p>
+            <h1 class="desc mb-3 text-white"> This is my project bitch show some <span
+                    class="text-danger">respect</span></h1>
+            <p class="desc-para text-white">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem
+                dolor culpa laudantium nulla, in eos consequuntur at sint accusantium ea ut inventore deleniti velit
+                amet ratione ab incidunt atque recusandae praesentium quaerat architecto soluta doloremque! Molestiae,
+                laudantium rerum. Veritatis, itaque hic. Culpa officiis aliquam, placeat corrupti recusandae et delectus
+                nulla.</p>
             <div class="d-flex gap-3 justify-content-start align-items-center">
                 <i class="fa-solid fa-arrow-right-long text-danger mb-3 "></i>
                 <p class="text-danger text-center">learn more</p>
@@ -503,12 +508,17 @@ $cars = getAllCars();
                             <div class="caret"></div>
                         </div>
                         <ul class="menu">
-                            <?php foreach ($cars as $car) : ?>
-                                <li class=""><?php echo $car['mark'] ?></li>
-                                <input id="model-" class="d-none" type="text" name="model" value="<?php echo $car['model']; ?>">
-                                <input id="mark-" class="d-none" type="text" name="mark" value="<?php echo $car['mark']; ?>">
-                                <input id="registration_number-" type="hidden" name="registration_number" value="<?php echo $car['registration_number']; ?>">
-                                <input type="number" value="<?php echo $car['id'] ?>" name="car_id" class="d-none">
+                            <?php foreach ($cars as $car): ?>
+                                <?php if ($car['status'] == 'available'): ?>
+                                    <li class=""><?php echo $car['mark'] ?></li>
+                                    <input id="model-" class="d-none" type="text" name="model"
+                                        value="<?php echo $car['model']; ?>">
+                                    <input id="mark-" class="d-none" type="text" name="mark"
+                                        value="<?php echo $car['mark']; ?>">
+                                    <input id="registration_number-" type="hidden" name="registration_number"
+                                        value="<?php echo $car['registration_number']; ?>">
+                                    <input type="number" value="<?php echo $car['id'] ?>" name="car_id" class="d-none">
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -593,7 +603,8 @@ $cars = getAllCars();
                 <img src="../../public/assets/images/card-2.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
@@ -601,7 +612,8 @@ $cars = getAllCars();
                 <img src="../../public/assets/images/card-2.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
@@ -609,7 +621,8 @@ $cars = getAllCars();
                 <img src="../../public/assets/images/card-2.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
@@ -623,21 +636,24 @@ $cars = getAllCars();
             <div class="d-flex flex-col justify-content-center align-items-center">
                 <i class="fa-solid fa-car how-icon"></i>
                 <h3 class="text-white text-center">Choose a car</h3>
-                <p class="text-white text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quae neque quisquam, quas tempora similique obcaecati
+                <p class="text-white text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quae
+                    neque quisquam, quas tempora similique obcaecati
                     debitis </p>
             </div>
             <h2 class="text-danger mx-3"><b>..................................</b></h2>
             <div class="d-flex flex-col justify-content-center align-items-center">
                 <i class="fa-solid fa-receipt how-icon"></i>
                 <h3 class="text-white text-center">Book online</h3>
-                <p class="text-white text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quae neque quisquam, quas tempora similique obcaecati
+                <p class="text-white text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quae
+                    neque quisquam, quas tempora similique obcaecati
                     debitis !</p>
             </div>
             <h2 class="text-danger mx-3"><b>..................................</b></h2>
             <div class="d-flex flex-col justify-content-center align-items-center">
                 <i class="fa-solid fa-location-dot how-icon"></i>
                 <h3 class="text-white text-center">Pickup & drive</h3>
-                <p class="text-white text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quae neque quisquam, quas tempora similique obcaecati
+                <p class="text-white text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quae
+                    neque quisquam, quas tempora similique obcaecati
                     debitis </p>
             </div>
         </div>
@@ -646,15 +662,19 @@ $cars = getAllCars();
 <div class="about-sec">
     <div class="about-details">
         <div class="about-image">
-            <img width="300" src="../../public/assets/images/34979-red_porsche_911_on_road_during_daytime-1080x1920 (1).jpg" alt="" srcset="">
+            <img width="300"
+                src="../../public/assets/images/34979-red_porsche_911_on_road_during_daytime-1080x1920 (1).jpg" alt=""
+                srcset="">
         </div>
         <div class="about-desc">
             <h5 class="text-danger about-title">About Us</h5>
             <h2 class="text-white">Park auto car renting agency</h2>
             <p class="text-white about-p">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Optio omnis numquam inventore, veniam illum, repellendus animi quo tenetur cumque sunt
-                laborum quia necessitatibus iste minus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque fugit sunt
-                alias totam quisquam pariatur accusantium tenetur blanditiis vitae eius, eligendi fuga! Aperiam, consequatur architecto.</p>
+                laborum quia necessitatibus iste minus? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Doloremque fugit sunt
+                alias totam quisquam pariatur accusantium tenetur blanditiis vitae eius, eligendi fuga! Aperiam,
+                consequatur architecto.</p>
         </div>
     </div>
 </div>
@@ -664,70 +684,10 @@ $cars = getAllCars();
             <h2 class="text-white text-center">Testimonial</h2>
             <h4 class="text-center text-danger my-4">What Our Customers Says</h4>
         </div>
-        <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
+        <div class="w-[80%]">
+                 <div class="">
 
-                    <div class="test-container">
-                        <i class="fa-solid fa-quote-left text-danger fs-1"></i>
-                        <p class="fs-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, aperiam. Lorem ipsum dolor sit amet.</p>
-                        <i class="fa-solid fa-quote-right text-danger text-end fs-1"></i>
-                    </div>
-                    <div class="persona">
-                        <img src="../../public/assets/images/zack.jpeg" class="rounded-circle" width="100" alt="">
-                        <div class="infos">
-                            <h5 class="text-danger">Web developer</h5>
-                            <p>He loves kaoutar aurora</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="carousel-item active">
-
-                    <div class="test-container">
-                        <i class="fa-solid fa-quote-left text-danger fs-1"></i>
-                        <p class="fs-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, aperiam. Lorem ipsum dolor sit amet.</p>
-                        <i class="fa-solid fa-quote-right text-danger text-end fs-1"></i>
-                    </div>
-                    <div class="persona">
-                        <img src="../../public/assets/images/hamza.jpeg" class="rounded-circle" width="100" alt="">
-                        <div class="infos">
-                            <h5 class="text-danger">Web developer</h5>
-                            <p>He loves kaoutar aurora</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="carousel-item active">
-
-                    <div class="test-container">
-                        <i class="fa-solid fa-quote-left text-danger fs-1"></i>
-                        <p class="fs-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, aperiam. Lorem ipsum dolor sit amet.</p>
-                        <i class="fa-solid fa-quote-right text-danger text-end fs-1"></i>
-                    </div>
-                    <div class="persona">
-                        <img src="../../public/assets/images/zack.jpeg" class="rounded-circle" width="100" alt="">
-                        <div class="infos">
-                            <h5 class="text-danger">Web developer</h5>
-                            <p>He loves kaoutar aurora</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+                 </div>               
         </div>
     </div>
 </div>

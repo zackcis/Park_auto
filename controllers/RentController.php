@@ -8,8 +8,8 @@ class RentController
     public function rentCar()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump($_POST);
-            die();
+            // var_dump($_POST);
+            // die();
             session_start();
             $car_id = $_POST['car_id'];
             $model = $_POST['model'];
@@ -26,7 +26,7 @@ class RentController
             $rental = new Rental();
             $rental->car_id = $car_id;
             $rental->user_id = $user_id;
-            var_dump($status);
+            // var_dump($status);
             $rental->pickup_date = $pickup_date;
             $rental->dropoff_date = $dropoff_date;
             $rental->pickup_location = $pickup_location;
